@@ -5,6 +5,48 @@ const path = require( "path" )
 
 const api = require( "./lib/api" )
 
+// db import
+const sqlite3 = require('sqlite3').verbose();
+//db initialize
+const db = new sqlite3.Database('./mydatabase.sqlite', (err) => {
+  if (err) {
+    console.error('Failed to connect to SQLite database', err);
+  } else {
+    console.log('Connected to SQLite database');
+  }
+});
+
+// Create tables once DB is opened
+db.serialize(() => {
+
+  // Create people table 
+  db.run(`CREATE TABLE IF NOT EXISTS people (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    notes TEXT NOT NULL,
+    schedule TEXT NOT NULL
+  )`);
+
+  // Create landlords table
+  db.run(`CREATE TABLE IF NOT EXISTS landlords (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    landlord TEXT NOT NULL,
+    buildings TEXT NOT NULL,
+    contact TEXT NOT NULL
+  )`);
+
+  // Create buildings table
+  db.run(`CREATE TABLE IF NOT EXISTS buildings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    building TEXT NOT NULL,
+    landlord TEXT NOT NULL,
+    rooms INTEGER NOT NULL,
+    availability TEXT NOT NULL,
+    contact TEXT NOT NULL
+  )`);
+});
+
 const publicdirectory = path.join( __dirname, "public" )
 
 /**
@@ -53,7 +95,7 @@ const server = http.createServer( async ( req, res ) => {
     } catch( e ) { /* silent */ }
 
     if( 0 == pathname.indexOf( "/api/" ) ) {
-      await api.handleapi( parsedurl, res, req, receivedobj )
+      await api.handleapi( parsedurl, res, req, receivedobj, db )
     } else {
       // If the request is for a static file (HTML, CSS, JS)
       let filePath = path.join(

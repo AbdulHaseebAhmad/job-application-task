@@ -12,7 +12,8 @@ body, ul {
 /* Basic styling for the content */
 #content {
   flex: 1; /* Grow to fill available space */
-  padding: 20px;
+  /* padding: 20px; */
+
 }
 
 /* Basic styling for the footer */
@@ -30,6 +31,7 @@ footer {
 }
 
 .container {
+  z-index: 1000;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -38,8 +40,8 @@ footer {
 
 /* Style the form */
 form {
-  width: 500px;
-  padding: 20px;
+  width: 600px;
+  padding: 20px 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
@@ -53,9 +55,10 @@ label {
 /* Styling for form elements */
 input[type="text"],
 input[type="email"],
+input[type="number"],
 button, textarea {
   padding: 12px; /* Increased padding for better clickability */
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 18px; /* Larger font size for better accessibility */
@@ -88,13 +91,140 @@ tr:nth-of-type(2) th {
   border-bottom: none;
 }
 
-th, td {
-  padding: 12px; /* Increased padding for better readability */
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+
+
+
+
+main{
+  box-sizing: border-box;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background-color: #0F172A;
+  min-height: 100vh;
+  padding: 10px;
+  gap:20%;
+  position: relative;
+  .backdrop{
+    display: none;
+    box-sizing: border-box;
+    position: absolute;
+    height: 100%;
+    opacity: 0.4;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffff;
+    z-index: 10;
+  }
+  button{
+      background-color: #3B82F6;
+      border: #334155;
+      padding: 20px;
+      min-width: 120px;;
+  }
+
+  button:hover{
+      background-color: #60A5FA;
+  }
+
+  .nav{
+    box-sizing: border-box;
+    padding:20px;
+    display: flex;
+    align-items: end;
+    width: 100%;
+    justify-content: space-between;
+    h1{
+      align-self: flex-start;
+      color:#F8FAFC;
+      font-size: 2.15vw;
+      text-align: center;
+    }
+    .btn-back{
+    width: 150px;
+    padding: 10px;
+    height: 50px;
+
+    }
+  }
+
+
+  .main-nav-container{
+    max-width: clamp(350px,50%,800px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:5px;
+
+   .main-sub-heading{
+      font-size: clamp(1rem,2rem,2.25rem);
+      color:#CBD5E1 ;
+    }
+
+    .main-btn-container{
+      width: 100%;
+      flex-wrap: wrap;
+      display: flex;
+      gap:20px;
+
+    
+    }
+
+
+  }
+
+  .people-screen{
+    width:95%;
+    padding:50px 0px;
+    color: #F8FAFC;
+    .people-screen-div{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      h2{
+        color:#F8FAFC;
+        font-size: 2.25vw;
+        text-align: start;
+      }
+     
+    }
+    th, td {
+      padding: 15px; /*Increased padding for better readability*/
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #3B82F6;
+    }  
+  }
+
+  .container{
+    position: absolute;
+  }
 }
 
-th {
-  background-color: #f2f2f2;
-}
+.Schedule-container{
+  margin-top: -10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-around;
+  align-items: start;
+  margin-bottom: 20px;
+  .group-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap:10px;
+    .schedule-group{
+      width: 180px;
+    }
 
+  }
+}
